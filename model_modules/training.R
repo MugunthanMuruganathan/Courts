@@ -18,12 +18,8 @@ train <- function(data_conf, model_conf, ...) {
     # select both the feature and target columns (ignorning e.g. entity key)
     columns <- unlist(c(data_conf$featureNames, data_conf$targetNames), use.name = TRUE)
     data <- table %>% select(all_of(columns)) %>% mutate(
-                       NumTimesPrg = as.integer(NumTimesPrg),
-                       PlGlcConc = as.integer(PlGlcConc),
-                       BloodP = as.integer(BloodP),
-                       SkinThick = as.integer(SkinThick),
-                       TwoHourSerIns = as.integer(TwoHourSerIns),
-                       HasDiabetes = as.integer(HasDiabetes)) %>% as.data.frame()
+                       Unconst = as.integer(Unconst),
+                       Reverse = as.integer(Reverse)) %>% as.data.frame()
 
     # Load hyperparameters from model configuration
     hyperparams <- model_conf[["hyperParameters"]]
@@ -31,7 +27,7 @@ train <- function(data_conf, model_conf, ...) {
     print("Training model...")
 
     # Train model
-    model <- gbm(HasDiabetes~.,
+    model <- gbm(Reverse~.,
                  data=data,
                  shrinkage=hyperparams$shrinkage,
                  distribution = 'bernoulli',
@@ -53,5 +49,5 @@ train <- function(data_conf, model_conf, ...) {
 
     # Save trained model
     print("Saving trained model...")
-    saveRDS(model, "artifacts/output/model.rds")
+    saveRDS(model, "artifacts/output/court_model.rds")
 }
