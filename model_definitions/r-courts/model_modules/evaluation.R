@@ -10,7 +10,7 @@ LoadPackages <- function() {
 }
 
 evaluate <- function(data_conf, model_conf, ...) {
-  model <- readRDS("artifacts/output/model.rds")
+  model <- readRDS("artifacts/model.rds")
   print("Evaluating model...")
 
   suppressPackageStartupMessages(LoadPackages())
@@ -36,5 +36,5 @@ evaluate <- function(data_conf, model_conf, ...) {
   preds$pred <- preds
   metrics <- cm$overall
 
-  write(jsonlite::toJSON(metrics, auto_unbox = TRUE, null = "null", keep_vec_names=TRUE), "artifacts/output/metrics.json")
+  write(jsonlite::toJSON(metrics, auto_unbox = TRUE, null = "null", keep_vec_names=TRUE), "artifacts/metrics.json")
 }
