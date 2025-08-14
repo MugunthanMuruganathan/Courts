@@ -50,5 +50,5 @@ train <- function(data_conf, model_conf, ...) {
 
     # Save trained model
     print("Saving trained model...")
-    saveRDS(model, "artifacts/court_model.rds")
+    saveRDS(model, "artifacts/output/court_model.rds")
 }
