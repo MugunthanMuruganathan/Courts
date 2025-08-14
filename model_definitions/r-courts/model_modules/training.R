@@ -19,7 +19,8 @@ train <- function(data_conf, model_conf, ...) {
     columns <- unlist(c(data_conf$featureNames, data_conf$targetNames), use.name = TRUE)
     data <- table %>% select(all_of(columns)) %>% mutate(
                        Unconst = as.integer(Unconst),
-                       Reverse = as.integer(Reverse)) %>% as.data.frame()
+                       Reverse = as.integer(Reverse)
+					   ) %>% as.data.frame()
 
     # Load hyperparameters from model configuration
     hyperparams <- model_conf[["hyperParameters"]]

@@ -10,7 +10,7 @@ LoadPackages <- function() {
 }
 
 evaluate <- function(data_conf, model_conf, ...) {
-  model <- readRDS("artifacts/input/model.rds")
+  model <- readRDS("artifacts/output/model.rds")
   print("Evaluating model...")
 
   suppressPackageStartupMessages(LoadPackages())
@@ -21,17 +21,13 @@ evaluate <- function(data_conf, model_conf, ...) {
   table <- tbl(con, sql(data_conf$sql))
 
     # Create dataframe from tibble, selecting the necessary columns and mutating integer64 to integers
-  data <- table %>% mutate(NumTimesPrg = as.integer(NumTimesPrg),
-                                PlGlcConc = as.integer(PlGlcConc),
-                                BloodP = as.integer(BloodP),
-                                SkinThick = as.integer(SkinThick),
-                                TwoHourSerIns = as.integer(TwoHourSerIns),
-                                HasDiabetes = as.integer(HasDiabetes)) %>% as.data.frame()
+  data <- table %>% mutate(Unconst = as.integer(Unconst),
+							   Reverse = as.integer(Reverse) ) %>% as.data.frame()
 
   probs <- predict(model, data, na.action = na.pass, type = "response")
   preds <- as.integer(ifelse(probs > 0.5, 1, 0))
 
-  cm <- confusionMatrix(table(preds, data$HasDiabetes))
+  cm <- confusionMatrix(table(preds, data$Reverse))
 
   png("artifacts/output/confusion_matrix.png", width = 860, height = 860)
   fourfoldplot(cm$table)
