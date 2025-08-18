@@ -29,6 +29,8 @@ evaluate <- function(data_conf, model_conf, ...) {
   probs <- predict(model, data, na.action = na.pass, type = "response")
   preds <- as.integer(ifelse(probs > 0.5, 1, 0))
 
+  print("Before Confustion Matrix call...")
+  
   cm <- confusionMatrix(table(preds, data$Reverse))
 
   png("artifacts/output/confusion_matrix.png", width = 860, height = 860)
