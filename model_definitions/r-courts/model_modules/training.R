@@ -18,7 +18,8 @@ train <- function(data_conf, model_conf, ...) {
     # select both the feature and target columns (ignorning e.g. entity key)
     columns <- unlist(c(data_conf$featureNames, data_conf$targetNames), use.name = TRUE)
     data <- table %>% select(all_of(columns)) %>% mutate(
-                       Unconst = as.integer(Unconst),
+                       Circuit = as.integer(Circuit),
+					   Unconst = as.integer(Unconst),
                        Reverse = as.integer(Reverse)
 					   ) %>% as.data.frame()
 
