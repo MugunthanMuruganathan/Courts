@@ -31,14 +31,14 @@ evaluate <- function(data_conf, model_conf, ...) {
 
   print("Before Confustion Matrix call...")
   
-  cm <- confusionMatrix(table(preds, data$Reverse))
+  # cm <- confusionMatrix(table(preds, data$Reverse))
 
   png("artifacts/output/confusion_matrix.png", width = 860, height = 860)
-  fourfoldplot(cm$table)
+  # fourfoldplot(cm$table)
   dev.off()
 
   preds$pred <- preds
-  metrics <- cm$overall
+  # metrics <- cm$overall
 
   write(jsonlite::toJSON(metrics, auto_unbox = TRUE, null = "null", keep_vec_names=TRUE), "artifacts/output/metrics.json")
 }
