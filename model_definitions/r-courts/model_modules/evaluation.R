@@ -34,7 +34,8 @@ evaluate <- function(data_conf, model_conf, ...) {
   preds <- as.integer(ifelse(probs > 0.5, 1, 0))
 
   print("Before Confustion Matrix call...")
-  print table(preds, data$Reverse) 
+  print preds
+  print data$Reverse
   
   cm <- confusionMatrix(table(preds, data$Reverse))
 
