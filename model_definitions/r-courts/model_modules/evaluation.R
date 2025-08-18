@@ -21,8 +21,10 @@ evaluate <- function(data_conf, model_conf, ...) {
   table <- tbl(con, sql(data_conf$sql))
 
     # Create dataframe from tibble, selecting the necessary columns and mutating integer64 to integers
-  data <- table %>% mutate(Unconst = as.integer(Unconst),
-							   Reverse = as.integer(Reverse) ) %>% as.data.frame()
+  data <- table %>% mutate(	   Circuit = as.integer(Circuit),
+							   Unconst = as.integer(Unconst),
+							   Reverse = as.integer(Reverse)
+    					  ) %>% as.data.frame()
 
   probs <- predict(model, data, na.action = na.pass, type = "response")
   preds <- as.integer(ifelse(probs > 0.5, 1, 0))
