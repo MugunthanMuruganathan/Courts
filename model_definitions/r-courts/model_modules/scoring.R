@@ -38,8 +38,8 @@ score.batch <- function(data_conf, model_conf, model_version, job_id, ...) {
 							  Petitioner = as.integer(Petitioner),
 							  Respondent = as.integer(Respondent),
 							  LowerCourt = as.integer(LowerCourt),
-							  Uncon = as.integer(Uncon),
-							  Reverse = as.integer(Reverse)
+							  Uncon = as.integer(Uncon)#,
+							  #Reverse = as.integer(Reverse)
 							 ) %>% as.data.frame()
 
     # The model object will be obtain from the environment as it has already been initialised using 'initialise_model'
