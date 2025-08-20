@@ -22,15 +22,15 @@ evaluate <- function(data_conf, model_conf, ...) {
 
     # Create dataframe from tibble, selecting the necessary columns and mutating integer64 to integers
   data <- table %>% mutate(	
-					  Docket = as.integer(Docket),
-					  Term = as.integer(Term),
-					  Circuit = as.integer(Circuit),
-					  Issue = as.integer(Issue),
-					  Petitioner = as.integer(Petitioner),
-					  Respondent = as.integer(Respondent),
-					  LowerCourt = as.integer(LowerCourt),
-					  Uncon = as.integer(Uncon)
-							 
+							  Docket = as.integer(Docket),
+							  Term = as.integer(Term),
+							  Circuit = as.integer(Circuit),
+							  Issue = as.integer(Issue),
+							  Petitioner = as.integer(Petitioner),
+							  Respondent = as.integer(Respondent),
+							  LowerCourt = as.integer(LowerCourt),
+							  Uncon = as.integer(Uncon),
+							  Reverse = as.integer(Reverse)
     					  ) %>% as.data.frame()
 
   probs <- predict(model, data, na.action = na.pass, type = "response")

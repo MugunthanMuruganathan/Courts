@@ -25,7 +25,8 @@ train <- function(data_conf, model_conf, ...) {
 					  Petitioner = as.integer(Petitioner),
 					  Respondent = as.integer(Respondent),
 					  LowerCourt = as.integer(LowerCourt),
-					  Uncon = as.integer(Uncon)
+					  Uncon = as.integer(Uncon),
+					  Reverse = as.integer(Reverse)
 					   ) %>% as.data.frame()
 
     # Load hyperparameters from model configuration
